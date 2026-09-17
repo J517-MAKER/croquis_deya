@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Croquis del recorrido del transporte de personal</title>
+
+  <!-- Tipografía Inter (con Arial como respaldo, definido en styles.css) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet: librería gratuita de mapas (no requiere cuenta ni API Key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>CROQUIS DEL RECORRIDO DEL TRANSPORTE DE PERSONAL</h1>
+      <p class="subtitle">Recorrido desde el punto de abordaje hasta H-E-B El Uro</p>
+    </div>
+  </header>
+
+  <!-- Nota de advertencia sobre el punto del accidente -->
+  <div class="accident-note" role="note">
+    <span class="accident-note__icon" aria-hidden="true">⚠</span>
+    <p>El punto <strong>C</strong> señala la ubicación aproximada donde ocurrió el accidente durante el recorrido del
+      transporte de personal.</p>
+  </div>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main class="layout">
+
+    <!-- ---------- COLUMNA DEL MAPA ---------- -->
+    <section class="map-column" aria-label="Mapa del recorrido">
+
+      <!-- Botones para centrar el mapa en cada punto -->
+      <div class="toolbar" id="toolbar">
+        <button type="button" id="btn-a" class="btn btn--a">Ir a A — Inicio</button>
+        <button type="button" id="btn-c" class="btn btn--c">Ir a C — Accidente</button>
+        <button type="button" id="btn-b" class="btn btn--b">Ir a B — Destino</button>
+        <button type="button" id="btn-full" class="btn btn--neutral">Mostrar recorrido completo</button>
+      </div>
+
+      <!-- Contenedor del mapa + leyenda flotante -->
+      <div class="map-wrapper">
+        <div id="map" role="application" aria-label="Mapa interactivo del recorrido"></div>
+
+        <div class="legend" id="legend">
+          <h3>Leyenda</h3>
+          <ul>
+            <li><span class="dot dot--green"></span> A — Inicio del recorrido</li>
+            <li><span class="dot dot--red"></span> C — Punto del accidente</li>
+            <li><span class="dot dot--blue"></span> B — Destino final</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Aviso de estado de la ruta (se llena desde script.js) -->
+      <p class="route-status" id="route-status" role="status"></p>
+
+      <!-- Botones de acciones adicionales, fuera del mapa -->
+      <div class="map-actions">
+        <button type="button" id="btn-open-gmaps" class="btn btn--outline">Abrir en Google Maps</button>
+        <button type="button" id="btn-print" class="btn btn--outline">Imprimir croquis</button>
+      </div>
+    </section>
+
+    <!-- ---------- PANEL LATERAL DE INFORMACIÓN ---------- -->
+    <aside class="info-panel" aria-label="Información del recorrido">
+      <h2>Información del recorrido</h2>
+      <p class="route-summary">Recorrido del transporte de personal</p>
+      <p class="route-path">A → C → B</p>
+
+      <div class="info-item">
+        <span class="badge badge--green">A</span>
+        <div class="info-item__text">
+          <h4>Inicio del recorrido</h4>
+          <p>Parada donde el trabajador aborda el transporte de personal para dirigirse a su lugar de trabajo.</p>
+        </div>
+      </div>
+
+      <div class="info-item info-item--accident">
+        <span class="badge badge--red">C</span>
+        <div class="info-item__text">
+          <h4>Punto del accidente</h4>
+          <p>Punto aproximado donde ocurrió el accidente durante el recorrido del transporte de personal, debido a un
+            frenón realizado por el conductor.</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="badge badge--blue">B</span>
+        <div class="info-item__text">
+          <h4>Destino final</h4>
+          <p>H-E-B El Uro, destino final del recorrido del transporte de personal.</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>Documento generado como evidencia visual del recorrido. Coordenadas e información proporcionadas por el usuario;
+      ninguna calle, colonia u horario fue inventado.</p>
+    <p>Mapa: © colaboradores de OpenStreetMap. Cálculo de ruta: OSRM. La atribución de los mosaicos se muestra en la
+      esquina del mapa.</p>
+  </footer>
+
+  <!-- ===================== LIBRERÍA + SCRIPT PROPIO ===================== -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

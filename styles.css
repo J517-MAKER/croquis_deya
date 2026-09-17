@@ -1,0 +1,528 @@
+/* =========================================================
+   TOKENS DE DISEÑO
+   Colores, tipografía y medidas centralizadas para que el
+   documento se vea sobrio, profesional y consistente.
+   ========================================================= */
+:root {
+  --color-bg: #F4F5F7;
+  /* gris muy claro de fondo */
+  --color-surface: #FFFFFF;
+  /* tarjetas y paneles */
+  --color-header: #0B2545;
+  /* azul oscuro para encabezados */
+  --color-header-text: #FFFFFF;
+  --color-text: #1F2933;
+  --color-muted: #5B6673;
+  --color-border: #E1E4E9;
+
+  --color-green: #1E7B34;
+  /* punto A */
+  --color-red: #C0392B;
+  /* punto C — accidente (único uso del rojo) */
+  --color-blue: #1565C0;
+  /* punto B */
+
+  --color-warning-bg: #FDEDEC;
+  --color-warning-border: #F3C6C0;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.08);
+
+  --font-main: "Inter", Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+.site-header {
+  background: var(--color-header);
+  color: var(--color-header-text);
+  padding: 28px 24px;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.site-header .subtitle {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  color: #C9D6E8;
+  font-weight: 400;
+}
+
+/* Nota de advertencia bajo el título */
+.accident-note {
+  max-width: 1200px;
+  margin: 16px auto 0;
+  padding: 12px 16px;
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.accident-note__icon {
+  color: var(--color-red);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.accident-note p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL: mapa + panel lateral
+   ========================================================= */
+.layout {
+  max-width: 1200px;
+  margin: 20px auto 40px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ---------- Columna del mapa ---------- */
+.map-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn {
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  color: #FFFFFF;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-header);
+  outline-offset: 2px;
+}
+
+.btn--a {
+  background: var(--color-green);
+}
+
+.btn--c {
+  background: var(--color-red);
+}
+
+.btn--b {
+  background: var(--color-blue);
+}
+
+.btn--neutral {
+  background: var(--color-header);
+}
+
+.btn--outline {
+  background: var(--color-surface);
+  color: var(--color-header);
+  border: 1px solid var(--color-border);
+}
+
+/* Contenedor del mapa, tamaño grande */
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  background: var(--color-surface);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Leyenda flotante sobre el mapa */
+.legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+  /* por encima de las capas y controles de Leaflet */
+}
+
+.legend h3 {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.legend ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.82rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.dot--green {
+  background: var(--color-green);
+}
+
+.dot--red {
+  background: var(--color-red);
+}
+
+.dot--blue {
+  background: var(--color-blue);
+}
+
+/* Aviso de estado del cálculo de la ruta */
+.route-status {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  min-height: 1.2em;
+}
+
+.route-status--warning {
+  color: var(--color-red);
+  font-weight: 600;
+}
+
+.map-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Panel lateral ---------- */
+.info-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 20px;
+}
+
+.info-panel h2 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: var(--color-header);
+}
+
+.route-summary {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.route-path {
+  margin: 4px 0 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.info-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.info-item:first-of-type {
+  border-top: none;
+}
+
+.badge {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.badge--green {
+  background: var(--color-green);
+}
+
+.badge--red {
+  background: var(--color-red);
+}
+
+.badge--blue {
+  background: var(--color-blue);
+}
+
+.info-item__text h4 {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  color: var(--color-text);
+}
+
+.info-item__text p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.info-item--accident .info-item__text h4 {
+  color: var(--color-red);
+}
+
+/* =========================================================
+   PIE DE PÁGINA
+   ========================================================= */
+.site-footer {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  padding: 0 16px;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+/* =========================================================
+   MARCADORES PERSONALIZADOS (divIcon de Leaflet)
+   Gota de color con letra, generada desde script.js
+   ========================================================= */
+
+/* El contenedor del divIcon debe ser transparente, sin borde */
+.map-pin-wrapper {
+  background: transparent;
+  border: none;
+}
+
+.map-pin {
+  width: 34px;
+  height: 34px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.map-pin__label {
+  transform: rotate(45deg);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+}
+
+.map-pin--green {
+  background: var(--color-green);
+}
+
+.map-pin--red {
+  background: var(--color-red);
+}
+
+.map-pin--blue {
+  background: var(--color-blue);
+}
+
+/* Ventanas de información (popups de Leaflet) */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.18);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--color-muted);
+}
+
+/* Contenido de las ventanas de información */
+.info-window {
+  font-family: var(--font-main);
+  max-width: 240px;
+}
+
+.info-window h4 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: var(--color-header);
+}
+
+.info-window p {
+  margin: 0 0 6px;
+  font-size: 0.83rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.info-window .coords {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.info-window .warning {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-red);
+}
+
+/* =========================================================
+   RESPONSIVE: tablet y celular
+   ========================================================= */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-wrapper {
+    height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header h1 {
+    font-size: 1.15rem;
+  }
+
+  .map-wrapper {
+    height: 320px;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+/* =========================================================
+   IMPRESIÓN: solo mapa, puntos e información principal
+   ========================================================= */
+@media print {
+
+  .toolbar,
+  .map-actions,
+  .route-status,
+  .leaflet-control-zoom {
+    display: none !important;
+  }
+
+  body {
+    background: #FFFFFF;
+  }
+
+  /* Imprime los mosaicos del mapa y los colores de los puntos */
+  .map-wrapper,
+  .map-pin,
+  .badge,
+  .dot,
+  .leaflet-container {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* La atribución de OpenStreetMap debe seguir visible impresa */
+  .site-footer {
+    font-size: 0.7rem;
+    color: #333333;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0;
+  }
+
+  .map-wrapper {
+    height: 480px;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .info-panel {
+    box-shadow: none;
+    border: 1px solid #CCC;
+    margin-top: 16px;
+  }
+
+  .site-header {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 0 0 12px;
+  }
+
+  .site-header .subtitle {
+    color: #333333;
+  }
+}
